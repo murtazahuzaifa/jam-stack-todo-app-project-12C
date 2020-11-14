@@ -12,6 +12,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@types/styled-components": "^5.1.4",
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "@typescript-eslint/parser": "^4.7.0",
     "babel-plugin-styled-components": "^1.11.1",

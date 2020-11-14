@@ -8,8 +8,8 @@ const TodoList: FC<{ todos: TodoType[] }> = ({ todos }) => {
             <h1>TODOS LIST</h1>
             {
                 todos.map((todo, idx) => {
-                    return <s.Todo id={idx} key={idx} >
-                        <span>{todo.todo}</span>
+                    return <s.Todo key={idx} _id={idx} > 
+                        <span>{todo.todo}</span> <s.DeletBtn>Delete</s.DeletBtn>
                     </s.Todo>
                 })
             }

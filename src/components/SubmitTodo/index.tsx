@@ -1,11 +1,13 @@
 import React from 'react'
+import { TodoType } from '../../pages/index';
+import * as s from './style';
 
 const SubmitTodo = () => {
     return (
-        <div>
-            <input type="text"/>
-            <button>Add Todo</button>
-        </div>
+        <s.Wrapper>
+            <s.Input placeholder="Todo here.." type="text"/>
+            <s.Button>Add Todo</s.Button>
+        </s.Wrapper>
     )
 }
 

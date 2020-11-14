@@ -35,7 +35,6 @@ const index: FC<PageProps> = () => {
         })
     }
 
-
     return (
         <PageLayout>
             <Seo />

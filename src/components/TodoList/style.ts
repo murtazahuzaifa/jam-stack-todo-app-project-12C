@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import React from 'react';
 
 export const Wrapper = styled.div`
     width: 100%;
@@ -14,12 +15,36 @@ export const Wrapper = styled.div`
     }
 `
 
-export const Todo = styled.div.attrs((props: { id: number }) => ({
-    _color: ({ id }) => id%2 === 0 ? 'rgba(0,0,0,.05)' : 'transparent',
-}))`
+interface TodoProp { _id: number } // _color:string
+export const Todo = styled.div.attrs(({ _id }: TodoProp) => ({
+    _color: _id % 2 === 0 ? 'rgba(0,0,0,.05)' : 'transparent',
+})) <TodoProp>`
     font-size: larger;
     background-color: ${({ _color }) => _color};
     color: rgb(70,70,70);
     padding: 10px;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    transition: 0.2s ease-in-out;
+    &:hover{
+        background-color: #A2D5D7;
+    }
+`
 
+export const DeletBtn = styled.button`
+    border-radius: 5px;
+    color: red;
+    background-color: 	whitesmoke;
+    border: 1px solid lightgray;
+    padding: 10px;
+    font-size:15px;
+    transition: .10s ease-in-out;
+    &:focus{
+        border: 1px solid grey;
+    }
+    &:hover{
+        background-color:red;
+        color: whitesmoke;
+    }
 `
