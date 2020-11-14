@@ -16,10 +16,6 @@ const initialSate: StateType = {
         { id: 1, todo: 'hello world' },
         { id: 2, todo: 'JAM Stack todo' },
         { id: 3, todo: 'Author is Murtaza' },
-        { id: 4, todo: 'Author is Murtaza' },
-        { id: 5, todo: 'Author is Murtaza' },
-        { id: 6, todo: 'JAM Stack todo' },
-        { id: 7, todo: 'JAM Stack todo' },
     ]
 }
 
@@ -27,8 +23,10 @@ const initialSate: StateType = {
 const index: FC<PageProps> = () => {
     const [state, setState] = useState<StateType>(initialSate);
 
-    const addTodo = (todo: TodoType) => { setState({ ...state, data: [...state.data, todo] }) };
-    const deleteTodo = (id: TodoType['id']) => {
+    const handleAddTodo = (todo: TodoType['todo']) => { 
+        setState({ ...state, data: [...state.data, {id:(state.data.slice(-1)[0]?.id||0)+1,todo}] }) 
+    };
+    const handleDeleteTodo = (id: TodoType['id']) => {
         setState({
             ...state,
             data: [...state.data.filter((todo) => todo.id !== id)]
@@ -39,8 +37,8 @@ const index: FC<PageProps> = () => {
         <PageLayout>
             <Seo />
             <div>
-                <div><SubmitTodo /></div>
-                <div><TodoList todos={state.data} /></div>
+                <div><SubmitTodo onSubmitTodo={handleAddTodo} /></div>
+                <div><TodoList todos={state.data} onDeleteTodo={handleDeleteTodo}  /></div>
             </div>
         </PageLayout>
     )
