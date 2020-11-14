@@ -11,6 +11,11 @@ export const Header = styled.div`
 `
 
 export const Wrapper = styled.div`
+    width: 100%;
+`
+
+export const ChildWrapper = styled.div`
     max-width: 1080px;
-    margin: 40px 20px;
+    margin: 40px auto;
+    padding: 0 20px;
 `

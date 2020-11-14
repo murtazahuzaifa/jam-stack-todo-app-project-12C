@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { PageLayout, Seo, TodoList, SubmitTodo } from '../components';
 import { PageProps, } from 'gatsby';
+import axios from 'axios';
 
 export type TodoType = { id: number, todo: string };
 export type StateType = {
@@ -19,7 +20,6 @@ const initialSate: StateType = {
     ]
 }
 
-
 const index: FC<PageProps> = () => {
     const [state, setState] = useState<StateType>(initialSate);
 
@@ -33,6 +33,11 @@ const index: FC<PageProps> = () => {
         })
     }
 
+    const handleRequest = ()=>{
+        axios.put('/.netlify/functions/todo')
+        .then(({data})=> console.log(data))
+    }
+
     return (
         <PageLayout>
             <Seo />
@@ -40,6 +45,7 @@ const index: FC<PageProps> = () => {
                 <div><SubmitTodo onSubmitTodo={handleAddTodo} /></div>
                 <div><TodoList todos={state.data} onDeleteTodo={handleDeleteTodo}  /></div>
             </div>
+            <button onClick={()=>{handleRequest()}} >Request</button>
         </PageLayout>
     )
 }
