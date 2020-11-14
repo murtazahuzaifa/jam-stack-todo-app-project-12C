@@ -1,10 +1,12 @@
 import React from 'react';
+import {PageLayout, Seo} from '../components';
 
 const index = () => {
     return (
-        <div>
+        <PageLayout>
+            <Seo />
             <h1>Hello gatsby</h1>
-        </div>
+        </PageLayout>
     )
 }
 
