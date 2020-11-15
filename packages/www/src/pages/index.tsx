@@ -2,37 +2,43 @@ import React, { FC, useState, useEffect } from 'react';
 import { PageLayout, Seo, TodoList, SubmitTodo, Loader } from '../components';
 import { PageProps, } from 'gatsby';
 import http from '../services/http';
+import { useQuery, gql } from '@apollo/client';
 
-export type TodoType = { id: string, todo: string, ts: number };
+export type TodoType = { id: string, text: string, ts: number };
 export type StateType = {
     isLoading: boolean,
     isError: boolean,
-    data: TodoType[],
+    todos: TodoType[],
 }
 
 const initialSate: StateType = {
     isLoading: false,
     isError: false,
-    data: []
+    todos: []
 }
+
+const query = gql`
+    { todos{ text, id, ts } }
+`
 
 const index: FC<PageProps> = () => {
     const [state, setState] = useState<StateType>(initialSate);
+    const { data, error, loading, refetch, } = useQuery(query);
 
     const handleUpdateTodos = () => {
         setState({ ...state, isLoading: true });
         http.get('/.netlify/functions/todo')
             .then(({ data }) => {
                 const todos = data.todos.map((d) => ({
-                    todo: d.todo, id: d.id, ts: Number(d.timeStamp)
+                    text: d.todo, id: d.id, ts: Number(d.timeStamp)
                 })) as TodoType[]
-                setState({ ...state, data: todos, isLoading: false })
+                setState({ ...state, todos: [...todos], isLoading: false })
             })
             .catch(({ response }) => { console.log(response); setState({ ...state, isLoading: false }); })
     }
-    const handleAddTodo = (todo: TodoType['todo']) => {
+    const handleAddTodo = (todoText: TodoType['text']) => {
         setState({ ...state, isLoading: true });
-        http.post('/.netlify/functions/todo', { todo })
+        http.post('/.netlify/functions/todo', { todo: todoText })
             .then(() => { handleUpdateTodos(); setState({ ...state, isLoading: false }) })
             .catch(({ response }) => { console.log(response); setState({ ...state, isLoading: false }); })
     };
@@ -43,22 +49,38 @@ const index: FC<PageProps> = () => {
                 setState({
                     ...state,
                     isLoading: false,
-                    data: [...state.data.filter((todo) => todo.id !== id)]
+                    todos: [...state.todos.filter((todo) => todo.id !== id)]
                 })
             })
             .catch(({ response }) => { console.log(response); setState({ ...state, isLoading: false }); })
     }
 
-    useEffect(handleUpdateTodos, [])
+    // useEffect(handleUpdateTodos, [])
+    useEffect(() => {
+        if (data) {
+        console.log('useEffect')
+
+            const todos = data.todos.map((d) => ({
+                text: d.text, id: d.id, ts: Number(d.timeStamp)
+            })) as TodoType[]
+            setState({ ...state, todos: [...todos], isLoading: false })
+        }
+    }, [data])
 
     return (
         <PageLayout>
             <Seo />
             <div>
                 <div><SubmitTodo onSubmitTodo={handleAddTodo} /></div>
-                <div><TodoList todos={state.data} onDeleteTodo={handleDeleteTodo} onUpdate={handleUpdateTodos} /></div>
+                <div>
+                    <TodoList
+                        todos={state.todos}
+                        onDeleteTodo={handleDeleteTodo}
+                        onUpdate={refetch}
+                    />
+                </div>
             </div>
-            <Loader isLoading={state.isLoading} />
+            <Loader isLoading={loading} />
         </PageLayout>
     )
 }

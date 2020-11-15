@@ -17,7 +17,7 @@ const TodoList: FC<Props> = ({ todos, onDeleteTodo, onUpdate }) => {
             {
                 todos.map((todo, idx) => {
                     return <s.Todo key={idx} _id={idx} >
-                        <span>{todo.todo}</span>
+                        <span>{todo.text}</span>
                         <s.DeletBtn onClick={() => { onDeleteTodo && onDeleteTodo(todo.id) }} >Delete</s.DeletBtn>
                     </s.Todo>
                 })

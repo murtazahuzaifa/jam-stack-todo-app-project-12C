@@ -1,0 +1,14 @@
+{
+  "name": "jamstact-todo-backend",
+  "version": "1.0.0",
+  "description": "serverless backend",
+  "author": "Murtaza Hanzala",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "apollo-server-lambda": "^2.19.0",
+    "dotenv": "^8.2.0",
+    "faunadb": "^3.0.1",
+    "graphql": "^15.4.0"
+  }
+}
