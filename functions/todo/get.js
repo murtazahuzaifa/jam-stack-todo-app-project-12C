@@ -19,10 +19,10 @@ module.exports = async (event) => {
     )
 
     const todos = [
-        ...result.data.map(({data,ts,ref})=>{
-            return{
-                todo:data,
-                timeStamp:ts,
+        ...result.data.map(({ data, ts, ref }) => {
+            return {
+                todo: data.todo,
+                timeStamp: ts,
                 id: ref.id
             }
         })

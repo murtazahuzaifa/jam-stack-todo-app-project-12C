@@ -11,10 +11,10 @@ module.exports = async (event) => {
 
     // body data checking
     const { todo } = JSON.parse(event.body);
-    if (!todo) {
+    if (!todo || typeof(todo)!=='string' ) {
         return {
             statusCode: 400,
-            body: JSON.stringify({ success: false, message: `Invalid Data`, data: JSON.parse(event.body) }),
+            body: JSON.stringify({ success: false, message: `Invalid Data, require todo with type string`, data: JSON.parse(event.body) }),
         }
     }
 
@@ -26,7 +26,7 @@ module.exports = async (event) => {
     );
 
     const todos = {
-        todo: result.data,
+        todo: result.data.todo,
         timeStamp: result.ts,
         id: result.ref.id
     }

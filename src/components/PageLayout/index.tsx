@@ -9,7 +9,7 @@ const PageLayout: FC<Props> = ({ children }) => {
     return (
         <s.Wrapper>
             <s.Header>
-                <h1>JAM Stack Todo</h1>
+                <h1>Serverless CRUD App</h1>
             </s.Header>
             <s.ChildWrapper>
                 {children}

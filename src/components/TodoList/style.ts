@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import React from 'react';
 
 export const Wrapper = styled.div`
     width: 100%;
@@ -9,9 +8,14 @@ export const Wrapper = styled.div`
     box-shadow: 3px 3px 10px rgba(0,0,0,0.1) ;
     margin: 20px 0;
     padding: 15px;
-    >h1{
-        margin: 10px auto;
-        color: #660000;
+    >div{
+        width: 100%auto;
+        display: flex;
+        align-items: center;
+        >h1{
+            margin: 10px auto;
+            color: #660000;
+    }
     }
 `
 
@@ -47,4 +51,19 @@ export const DeletBtn = styled.button`
         background-color:red;
         color: whitesmoke;
     }
+`
+
+export const RefreshBtn = styled.button`
+    /* float: right; */
+    position: absolute;
+    font-size: 25px;
+    background-color: transparent;
+    border-radius: 50%; border: 0;
+    height: 40px; width:40px;
+    text-align: center; line-height: 30px;
+    &::after{
+        content:"⟳"
+    }
+    &:hover{ background-color: rgba(0,0,0,0.1)}
+    &:active{ background-color: rgba(0,0,0,0.15)}
 `

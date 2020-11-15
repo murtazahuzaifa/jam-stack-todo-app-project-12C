@@ -11,7 +11,7 @@ const SubmitTodo: FC<Props> = ({ onSubmitTodo }) => {
 
     const handleSubmit:FormEventHandler = (e) => {
         e.preventDefault();
-        onSubmitTodo && onSubmitTodo(todo);
+        onSubmitTodo && onSubmitTodo(todo||'Empty');
         setTodo('');
     }
 
