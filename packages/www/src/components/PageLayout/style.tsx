@@ -4,7 +4,7 @@ export const Header = styled.div`
     display:flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(90deg, #06AF9E , #00DDE5 );
+    background: linear-gradient(90deg, #afd160 , #4bca76 );
     color: whitesmoke;
     width: 100%;
     padding: 10px 0;

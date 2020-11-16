@@ -32,7 +32,7 @@ export const Todo = styled.div.attrs(({ _id }: TodoProp) => ({
     justify-content: space-between;
     transition: 0.2s ease-in-out;
     &:hover{
-        background-color: #A2D5D7;
+        background-color: #A1D7A1;
     }
 `
 
